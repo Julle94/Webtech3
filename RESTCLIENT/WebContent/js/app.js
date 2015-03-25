@@ -10,5 +10,5 @@ config(['$routeProvider', function($routeProvider) {
 	  $routeProvider.
 		when('/products', {templateUrl: 'partials/products.html', controller: 'ProductsController'}).
 		when('/products/addproduct', {templateUrl: 'partials/addproduct.html', controller: 'NewProductController'}).
-		when('/products/:shortname', {templateUrl: 'partials/product.html', controller: 'ProductController'});
+		when('/products/:name', {templateUrl: 'partials/product.html', controller: 'ProductController'});
 }]);

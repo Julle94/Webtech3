@@ -3,6 +3,7 @@ package edu.ap.jaxrs;
 import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.json.*;
+import javax.json.*;
 
 @XmlRootElement
 public class ProductsXML {

@@ -17,32 +17,6 @@ public class ProductResource {
 	
 	String loc = "C:\\Users\\Ti-student\\Desktop\\Product.json";
 	
-	@GET
-	@Produces({"text/html"})
-	public String getProductsHTML() {
-		String htmlString = "<html><body>";
-		try {
-			JAXBContext jaxbContext1 = JAXBContext.newInstance(ProductsXML.class);
-			Unmarshaller jaxbUnmarshaller = jaxbContext1.createUnmarshaller();
-			File XMLfile = new File(loc);
-			ProductsXML productsXML = (ProductsXML)jaxbUnmarshaller.unmarshal(XMLfile);
-			ArrayList<Product> listOfProducts = productsXML.getProducts();
-			
-			for(Product product : listOfProducts) {
-				htmlString += "Id : " + product.getId() + "<br>";
-				htmlString += "Price : " + product.getPrice() + "<br>";
-				htmlString += "<b>Name : " + product.getName() + "</b><br>";
-				htmlString += "Brand : " + product.getBrand() + "<br>";
-				htmlString += "Description : " + product.getDescription() + "<br>";
-
-				htmlString += "<br><br>";
-			}
-		} 
-		catch (JAXBException e) {
-		   e.printStackTrace();
-		}
-		return htmlString;
-	}
 	
 	@GET
 	@Produces({"application/json"})
@@ -73,6 +47,35 @@ public class ProductResource {
 		}
 		return jsonString;
 	}
+	
+	@GET
+	@Produces({"text/html"})
+	public String getProductsHTML() {
+		String htmlString = "<html><body>";
+		try {
+			JAXBContext jaxbContext1 = JAXBContext.newInstance(ProductsXML.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext1.createUnmarshaller();
+			File XMLfile = new File(loc);
+			ProductsXML productsXML = (ProductsXML)jaxbUnmarshaller.unmarshal(XMLfile);
+			ArrayList<Product> listOfProducts = productsXML.getProducts();
+			
+			for(Product product : listOfProducts) {
+				htmlString += "Id : " + product.getId() + "<br>";
+				htmlString += "Price : " + product.getPrice() + "<br>";
+				htmlString += "<b>Name : " + product.getName() + "</b><br>";
+				htmlString += "Brand : " + product.getBrand() + "<br>";
+				htmlString += "Description : " + product.getDescription() + "<br>";
+
+				htmlString += "<br><br>";
+			}
+		} 
+		catch (JAXBException e) {
+		   e.printStackTrace();
+		}
+		return htmlString;
+	}
+	
+
 	
 	@GET
 	@Produces({"text/xml"})
@@ -188,7 +191,7 @@ public class ProductResource {
 			Marshaller jaxbMarshaller = jaxbContext2.createMarshaller();
 			jaxbMarshaller.setProperty(MarshallerProperties.MEDIA_TYPE, "application/json");
 			jaxbMarshaller.setProperty(MarshallerProperties.JSON_INCLUDE_ROOT, true);
-			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			jaxbMarshaller.marshal(productsXML, JSONfile);
 		} 
 		catch (JAXBException e) {
